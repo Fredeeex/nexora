@@ -500,3 +500,169 @@ button{ font-family:inherit; }
   .contactGrid{ grid-template-columns: 1fr; }
   .row2{ grid-template-columns: 1fr; }
 }
+
+/* ---------- NAVBAR ---------- */
+.navWrap{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(10px);
+  background: rgba(8,10,18,.55);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.navInner{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 16px;
+}
+
+.brand{
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+.brandMark{
+  font-weight: 900;
+  letter-spacing: .5px;
+  color: rgba(255,255,255,.92);
+}
+
+.navLinks{
+  display:flex;
+  align-items:center;
+  gap: 14px;
+}
+
+.navLink{
+  text-decoration:none;
+  color: rgba(255,255,255,.72);
+  font-weight: 800;
+  font-size: 14px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  transition: background .15s ease, color .15s ease, transform .15s ease;
+}
+.navLink:hover{
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.92);
+  transform: translateY(-1px);
+}
+.navLink.active{
+  color: rgba(255,255,255,.95);
+  background: rgba(255,255,255,.08);
+}
+
+/* ---------- GLOWING AUDIT BUTTON ---------- */
+.auditBtn{
+  position: relative;
+  display:inline-flex;
+  align-items:center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  text-decoration:none;
+  border: 1px solid rgba(0, 190, 255, .22);
+  background: rgba(0, 190, 255, .12);
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.auditText{
+  position: relative;
+  z-index: 2;
+  color: rgba(255,255,255,.96);
+  font-weight: 900;
+  letter-spacing: .2px;
+  font-size: 13px;
+}
+
+.auditGlow{
+  position: absolute;
+  inset: -60%;
+  background: conic-gradient(
+    from 180deg,
+    rgba(0,190,255,.0),
+    rgba(0,190,255,.55),
+    rgba(140,120,255,.55),
+    rgba(0,190,255,.0)
+  );
+  animation: spinGlow 2.8s linear infinite;
+  filter: blur(10px);
+  opacity: .9;
+}
+
+@keyframes spinGlow{
+  to { transform: rotate(360deg); }
+}
+
+.auditBtn:hover{
+  border-color: rgba(0, 190, 255, .45);
+  background: rgba(0, 190, 255, .16);
+}
+
+/* ---------- MOBILE ---------- */
+.navBurger{
+  display:none;
+  width: 42px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.06);
+  cursor: pointer;
+}
+.navBurger span{
+  display:block;
+  width: 18px;
+  height: 2px;
+  background: rgba(255,255,255,.85);
+  margin: 4px auto;
+  border-radius: 2px;
+}
+
+.navMobile{
+  display:none;
+}
+
+@media (max-width: 860px){
+  .navLinks{ display:none; }
+  .navBurger{ display:block; }
+  .navMobile{
+    display:block;
+    padding: 10px 16px 16px;
+  }
+  .navMobileCard{
+    max-width: 1200px;
+    margin: 0 auto;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(10,12,22,.70);
+    border-radius: 16px;
+    padding: 10px;
+    display:flex;
+    flex-direction:column;
+    gap: 8px;
+  }
+  .mLink{
+    padding: 12px 12px;
+    border-radius: 12px;
+    text-decoration:none;
+    color: rgba(255,255,255,.82);
+    font-weight: 900;
+    background: rgba(255,255,255,.06);
+  }
+  .mLink.active{ background: rgba(255,255,255,.10); }
+  .mAudit{
+    padding: 12px 12px;
+    border-radius: 12px;
+    text-decoration:none;
+    font-weight: 900;
+    color: rgba(255,255,255,.96);
+    border: 1px solid rgba(0, 190, 255, .22);
+    background: rgba(0, 190, 255, .12);
+  }
+}

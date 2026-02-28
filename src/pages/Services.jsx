@@ -1,46 +1,61 @@
+import { motion } from "framer-motion";
+
 export default function Services() {
   return (
-    <main className="pageWrap">
-      <section className="pageHead">
-        <h1 className="h1">Services</h1>
-        <p className="lead">
-          Corporate Web Presence, Done Right — delivered end-to-end by Nexora Team.
+    <div className="page">
+
+      <section className="page-hero">
+        <h1>Lead-Generating Websites for Local UK Businesses</h1>
+        <p>
+          We build fast, conversion-focused websites designed to generate more calls,
+          more enquiries, and more local customers.
         </p>
       </section>
 
-      <section className="sectionGrid">
-        <article className="card">
-          <h3>Corporate Websites</h3>
-          <p>From planning to launch: structure, premium UI, responsive layout, and performance-first build.</p>
-        </article>
+      <section className="services-grid">
 
-        <article className="card">
-          <h3>Landing Pages</h3>
-          <p>Conversion-focused landing pages for campaigns, products, or lead generation.</p>
-        </article>
+        <motion.div 
+          className="service-card"
+          whileHover={{ y: -5 }}
+        >
+          <h3>Conversion-Focused Design</h3>
+          <p>
+            Clear call-to-action buttons, structured layouts, and mobile-first design
+            built to turn visitors into real enquiries.
+          </p>
+        </motion.div>
 
-        <article className="card">
-          <h3>AI Automation (Lightweight)</h3>
-          <p>Automate repetitive tasks: lead capture, sorting, simple insights, and workflow triggers.</p>
-        </article>
+        <motion.div 
+          className="service-card"
+          whileHover={{ y: -5 }}
+        >
+          <h3>Local SEO Structure</h3>
+          <p>
+            Optimised headings, local keywords, Google Maps integration,
+            and structured content to improve visibility in local searches.
+          </p>
+        </motion.div>
+
+        <motion.div 
+          className="service-card"
+          whileHover={{ y: -5 }}
+        >
+          <h3>Speed & Performance</h3>
+          <p>
+            Fast-loading websites that reduce bounce rate and keep potential
+            customers engaged.
+          </p>
+        </motion.div>
+
       </section>
 
-      <section className="sectionGrid">
-        <article className="card">
-          <h3>SEO-Ready Setup</h3>
-          <p>Clean structure, titles, metadata, and best practices to help your site be discoverable.</p>
-        </article>
-
-        <article className="card">
-          <h3>Performance & Security</h3>
-          <p>Fast loading, modern standards, and deployment setup with HTTPS.</p>
-        </article>
-
-        <article className="card">
-          <h3>Support & Maintenance</h3>
-          <p>Monthly support options: updates, content changes, and continuous improvements.</p>
-        </article>
+      <section className="cta-section">
+        <h2>Get a Free 15-Minute Website Audit</h2>
+        <a href="/contact" className="btn-primary">
+          Request Free Audit
+        </a>
       </section>
-    </main>
+
+    </div>
   );
 }

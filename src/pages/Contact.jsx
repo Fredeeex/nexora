@@ -3,9 +3,10 @@ import { useLocation } from "react-router-dom";
 
 export default function Contact() {
   const location = useLocation();
+
   const topic = useMemo(() => {
     const q = new URLSearchParams(location.search);
-    return q.get("topic") || "";
+    return q.get("topic") || "Free Website Audit";
   }, [location.search]);
 
   return (
@@ -13,37 +14,34 @@ export default function Contact() {
       <section className="pageHead">
         <h1 className="h1">Contact</h1>
         <p className="lead">
-          Tell us what you need. Nexora Team will reply with a clear plan and a professional proposal.
+          <strong>Book your free website audit.</strong> Tell us about your business and we’ll reply with clear,
+          actionable improvements.
         </p>
       </section>
 
       <section className="contactGrid">
         <article className="panel">
-          <h3>Quick Contact</h3>
+          <h3>Direct</h3>
           <p style={{ color: "rgba(255,255,255,.78)", lineHeight: 1.75, marginTop: 8 }}>
             Email:{" "}
             <a href="mailto:hello@nexoraweb.online" style={{ textDecoration: "underline" }}>
               hello@nexoraweb.online
             </a>
             <br />
-            Typical response time: 24 hours (business days).
+            UK local services • Websites that generate calls & enquiries.
           </p>
 
           <div className="caseStack" style={{ marginTop: 12 }}>
-            <span className="chip">Websites</span>
-            <span className="chip">Landing Pages</span>
-            <span className="chip">AI Automation</span>
-            <span className="chip">Support</span>
+            <span className="chip">Lead-focused</span>
+            <span className="chip">Mobile-first</span>
+            <span className="chip">Fast</span>
+            <span className="chip">Local SEO</span>
           </div>
         </article>
 
         <article className="panel">
-          <h3>Request a Proposal</h3>
-          <p style={{ color: "rgba(255,255,255,.78)", lineHeight: 1.75, marginTop: 8 }}>
-            Fill the form. Your message goes to our inbox (Netlify) and can be forwarded to email.
-          </p>
+          <h3>Free Audit Request</h3>
 
-          {/* NETLIFY FORM */}
           <form
             className="contactForm"
             name="contact"
@@ -51,8 +49,8 @@ export default function Contact() {
             data-netlify="true"
             data-netlify-honeypot="bot-field"
           >
-            {/* required hidden input for Netlify */}
             <input type="hidden" name="form-name" value="contact" />
+            <input type="hidden" name="topic" value={topic} />
 
             {/* honeypot */}
             <p className="hidden">
@@ -61,73 +59,44 @@ export default function Contact() {
               </label>
             </p>
 
-            <div className="row2">
-              <label>
-                Full name
-                <input name="name" type="text" placeholder="Your name" required />
-              </label>
-
-              <label>
-                Email
-                <input name="email" type="email" placeholder="you@email.com" required />
-              </label>
-            </div>
-
-            <div className="row2">
-              <label>
-                Phone (optional)
-                <input name="phone" type="text" placeholder="+44..." />
-              </label>
-
-              <label>
-                Topic
-                <input
-                  name="topic"
-                  type="text"
-                  defaultValue={topic}
-                  placeholder="Website / Landing / Automation..."
-                />
-              </label>
-            </div>
+            <label>
+              Name
+              <input name="name" type="text" placeholder="Your full name" required />
+            </label>
 
             <label>
-              Project details
-              <textarea
-                name="message"
-                rows="6"
-                placeholder="Tell us what you need, deadline, budget range, and any examples you like."
+              Email
+              <input name="email" type="email" placeholder="you@email.com" required />
+            </label>
+
+            <label>
+              Business type
+              <input
+                name="businessType"
+                type="text"
+                placeholder="e.g., electrician, cleaning, transport..."
                 required
               />
             </label>
 
-            <div className="row2">
-              <label>
-                Budget range (optional)
-                <select name="budget">
-                  <option value="">Select</option>
-                  <option value="under-500">Under £500</option>
-                  <option value="500-1200">£500–£1,200</option>
-                  <option value="1200-2500">£1,200–£2,500</option>
-                  <option value="2500-plus">£2,500+</option>
-                </select>
-              </label>
-
-              <label>
-                Timeline (optional)
-                <select name="timeline">
-                  <option value="">Select</option>
-                  <option value="asap">ASAP</option>
-                  <option value="2-4-weeks">2–4 weeks</option>
-                  <option value="1-2-months">1–2 months</option>
-                  <option value="flexible">Flexible</option>
-                </select>
-              </label>
-            </div>
+            <label>
+              Message
+              <textarea
+                name="message"
+                rows="6"
+                placeholder="What do you offer? What area do you serve? Any link to your current site?"
+                required
+              />
+            </label>
 
             <button className="btnPrimary" type="submit">
-              Send Message
+              Send Request
             </button>
           </form>
+
+          <p style={{ marginTop: 10, color: "rgba(255,255,255,.55)", fontSize: 12, lineHeight: 1.6 }}>
+            Tip: If you have a website, paste the link in the message for faster feedback.
+          </p>
         </article>
       </section>
     </main>
