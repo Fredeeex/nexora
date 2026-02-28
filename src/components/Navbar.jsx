@@ -1,117 +1,93 @@
+import React, { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { useEffect } from "react";
 
-const baseLink =
-  "px-3 py-2 rounded-lg text-sm font-medium transition hover:bg-white/10";
-
-const activeLink = "bg-white/10";
+const navLinkClass = ({ isActive }) =>
+  `px-3 py-2 rounded-lg text-sm font-medium transition ${
+    isActive ? "text-white" : "text-white/75 hover:text-white"
+  }`;
 
 export default function Navbar() {
-  const { pathname, hash } = useLocation();
+  const [open, setOpen] = useState(false);
+  const location = useLocation();
 
-  // لو داخل على /contact#audit يركز على الفورم
-  useEffect(() => {
-    if (pathname === "/contact" && hash === "#audit") {
-      const el = document.getElementById("audit");
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, [pathname, hash]);
+  React.useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
 
   return (
-    <header
-      style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
-        backdropFilter: "blur(12px)",
-        background: "rgba(8,10,20,0.65)",
-        borderBottom: "1px solid rgba(255,255,255,0.08)",
-      }}
-    >
-      <nav
-        style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          padding: "14px 16px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 12,
-        }}
-      >
-        <Link to="/" style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <div
-            style={{
-              width: 34,
-              height: 34,
-              borderRadius: 10,
-              background: "linear-gradient(135deg, #7c3aed, #06b6d4)",
-              boxShadow: "0 10px 30px rgba(124,58,237,0.25)",
-            }}
-          />
-          <span style={{ fontWeight: 800, letterSpacing: 0.5 }}>NEXORA</span>
-        </Link>
-
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <NavLink
-            to="/services"
-            className={({ isActive }) =>
-              `${baseLink} ${isActive ? activeLink : ""}`
-            }
-          >
-            Services
-          </NavLink>
-
-          <NavLink
-            to="/work"
-            className={({ isActive }) =>
-              `${baseLink} ${isActive ? activeLink : ""}`
-            }
-          >
-            Work
-          </NavLink>
-
-          <NavLink
-            to="/about"
-            className={({ isActive }) =>
-              `${baseLink} ${isActive ? activeLink : ""}`
-            }
-          >
-            About
-          </NavLink>
-
-          <NavLink
-            to="/contact"
-            className={({ isActive }) =>
-              `${baseLink} ${isActive ? activeLink : ""}`
-            }
-          >
-            Contact
-          </NavLink>
-
-          {/* CTA مميز */}
-          <Link
-            to="/contact#audit"
-            style={{
-              marginLeft: 8,
-              padding: "10px 14px",
-              borderRadius: 12,
-              fontWeight: 800,
-              fontSize: 13,
-              background: "linear-gradient(135deg, #f97316, #fb7185)",
-              color: "white",
-              boxShadow: "0 14px 40px rgba(249,115,22,0.25)",
-              border: "1px solid rgba(255,255,255,0.12)",
-              textDecoration: "none",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-            }}
-          >
-            🔥 Free Audit
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/30 backdrop-blur-xl">
+      <div className="mx-auto max-w-6xl px-4">
+        <div className="flex h-16 items-center justify-between">
+          <Link to="/" className="flex items-center gap-2">
+            <span className="text-lg font800 font-semibold tracking-wide text-white">
+              NEXORA
+            </span>
+            <span className="text-xs text-white/50">UK</span>
           </Link>
+
+          {/* Desktop */}
+          <nav className="hidden md:flex items-center gap-1">
+            <NavLink to="/services" className={navLinkClass}>
+              Services
+            </NavLink>
+            <NavLink to="/work" className={navLinkClass}>
+              Work
+            </NavLink>
+            <NavLink to="/about" className={navLinkClass}>
+              About
+            </NavLink>
+            <NavLink to="/contact" className={navLinkClass}>
+              Contact
+            </NavLink>
+
+            <Link
+              to="/contact"
+              className="ml-2 inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold
+                         bg-gradient-to-r from-amber-400 to-orange-500 text-black
+                         hover:opacity-95 active:opacity-90 transition shadow-lg shadow-orange-500/20"
+            >
+              🔥 Free Audit
+            </Link>
+          </nav>
+
+          {/* Mobile button */}
+          <button
+            onClick={() => setOpen((v) => !v)}
+            className="md:hidden inline-flex items-center justify-center rounded-xl border border-white/15 px-3 py-2 text-white/90"
+            aria-label="Toggle menu"
+          >
+            {open ? "Close" : "Menu"}
+          </button>
         </div>
-      </nav>
+
+        {/* Mobile menu */}
+        {open && (
+          <div className="md:hidden pb-4">
+            <div className="mt-2 flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/40 p-3">
+              <NavLink to="/services" className={navLinkClass}>
+                Services
+              </NavLink>
+              <NavLink to="/work" className={navLinkClass}>
+                Work
+              </NavLink>
+              <NavLink to="/about" className={navLinkClass}>
+                About
+              </NavLink>
+              <NavLink to="/contact" className={navLinkClass}>
+                Contact
+              </NavLink>
+
+              <Link
+                to="/contact"
+                className="mt-1 inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold
+                           bg-gradient-to-r from-amber-400 to-orange-500 text-black
+                           hover:opacity-95 active:opacity-90 transition"
+              >
+                🔥 Free Audit
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
     </header>
   );
-}
